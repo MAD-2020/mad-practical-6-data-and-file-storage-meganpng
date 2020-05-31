@@ -18,11 +18,9 @@ public class CustomScoreAdaptor extends RecyclerView.Adapter<CustomScoreViewHold
      */
     private static final String FILENAME = "CustomScoreAdaptor.java";
     private static final String TAG = "Whack-A-Mole3.0!";
-
+    UserData levelList;
     public CustomScoreAdaptor(UserData userdata){
-        /* Hint:
-        This method takes in the data and readies it for processing.
-         */
+        levelList = userdata;
     }
 
     public CustomScoreViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -46,5 +44,6 @@ public class CustomScoreAdaptor extends RecyclerView.Adapter<CustomScoreViewHold
         /* Hint:
         This method returns the the size of the overall data.
          */
+
     }
 }

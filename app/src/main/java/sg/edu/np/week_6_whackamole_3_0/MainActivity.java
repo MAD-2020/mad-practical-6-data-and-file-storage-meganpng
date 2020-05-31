@@ -2,15 +2,11 @@ package sg.edu.np.week_6_whackamole_3_0;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private static final String FILENAME = "MainActivity.java";
     private static final String TAG = "Whack-A-Mole3.0!";
+    private TextView enterusername, enterpassword;
 
+    MyDBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +36,64 @@ public class MainActivity extends AppCompatActivity {
             Log.v(TAG, FILENAME + ": Invalid user!");
 
         */
+    }
+
+    UserData dbUserData = new UserData(); //New User Data Object
+    dbUserData.setMyUserName(dbUsername); // Set User Name
+    dbUserData.setMyPassword(dbPassword); // Set Password
+    dbHandler.addUser(dbUserData); // Add User Data Object to DB
 
 
+    public void onClick(View v){
+        EditText inputusername = findViewById(R.id.enterusername);
+        String txt = inputusername.getText().toString();
+
+        SharedPreferences reader = getSharedPreferences("UserAccount", MODE_PRIVATE);
+        String fromSP =  reader.getString("account", "Not found");
+
+
+        textView.setText(fromSP);
+        SharedPreferences.Editor editor = (SharedPreferences.Editor) getSharedPreferences("UserAccount", MODE_PRIVATE);
+        editor.putString("account", txt);
+        editor.apply();
+    }
+
+    public void newProduct (View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        int quantity = Integer.parseInt(quantityBox.getText().toString());
+
+        Product product = new Product(productBox.getText().toString(), quantity);
+        dbHandler.addProduct(product);
+        productBox.setText("");
+        quantityBox.setText("");
+    }
+
+    public void removeProduct (View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        boolean result = dbHandler.deleteProduct(
+                productBox.getText().toString());
+        if (result)
+        {
+            idView.setText("Record Deleted");
+            productBox.setText("");
+            quantityBox.setText("");
+        }
+        else {
+            idView.setText("No Match Found");
+        }
+    }
+
+    public void lookupProduct (View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        Product product = dbHandler.findProduct(productBox.getText().toString());
+
+        if (product != null) {
+            idView.setText(String.valueOf(product.getID()));
+            quantityBox.setText(String.valueOf(product.getQuantity()));
+        }
+        else {
+            idView.setText("No Match Found");
+        }
     }
 
     protected void onStop(){
@@ -54,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             Log.v(TAG, FILENAME + ": Running Checks..." + dbData.getMyUserName() + ": " + dbData.getMyPassword() +" <--> "+ userName + " " + password);
             You may choose to use this or modify to suit your design.
          */
-
+        return
     }
 
 }
