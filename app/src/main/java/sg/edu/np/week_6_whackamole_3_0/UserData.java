@@ -32,21 +32,13 @@ public class UserData {
         this.Scores = myScores;
     }
 
-    public ArrayList<Integer> getLevels() {
-        return this.Levels;
-    }
+    public ArrayList<Integer> getLevels() { return this.Levels; }
 
-    public void setLevels(ArrayList<Integer> levels) {
-        this.Levels = levels;
-    }
+    public void setLevels(ArrayList<Integer> levels) { this.Levels = levels; }
 
-    public ArrayList<Integer> getScores() {
-        return this.Scores;
-    }
+    public ArrayList<Integer> getScores() { return this.Scores; }
 
-    public void setScores(ArrayList<Integer> scores) {
-        this.Scores = scores;
-    }
+    public void setScores(ArrayList<Integer> scores) { this.Scores = scores; }
 
     public String getMyUserName() {
         return this.MyUserName;

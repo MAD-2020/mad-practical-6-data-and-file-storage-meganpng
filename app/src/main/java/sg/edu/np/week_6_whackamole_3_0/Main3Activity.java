@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 public class Main3Activity extends AppCompatActivity {
     /* Hint:
@@ -27,11 +30,36 @@ public class Main3Activity extends AppCompatActivity {
      */
     private static final String FILENAME = "Main3Activity.java";
     private static final String TAG = "Whack-A-Mole3.0!";
-
+    private UserData userData = MainActivity.userdata;
+    private MyDBHandler dbHandler;
+    private Button loginbutton;
+    private ArrayList<Integer> levelList, scoreList;
+    private RecyclerView rv;
+    private CustomScoreAdaptor adaptor;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        loginbutton = findViewById(R.id.backtologin);
+        dbHandler = new MyDBHandler(this, null, null, 1);
+        String userName = userData.getMyUserName();
+        UserData data = dbHandler.findUser(userName);
+        rv = findViewById(R.id.customscoreview);
+        adaptor = new CustomScoreAdaptor(userData, this);
+        rv.setAdapter(adaptor);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(layoutManager);
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+        Log.v(TAG, FILENAME + ": Show level for User: "+ userName);
+        loginbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginpage = new Intent(Main3Activity.this, MainActivity.class);
+                startActivity(loginpage);
+            }
+        });
         /* Hint:
         This method receives the username account data and looks up the database for find the
         corresponding information to display in the recyclerView for the level selections page.
