@@ -67,6 +67,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         Log.v(TAG, FILENAME + ": Find user from database: " + query);
 
         if (cursor.moveToFirst()) {
+
             ArrayList<Integer> levelList = new ArrayList<>();
             ArrayList<Integer> scoreList = new ArrayList<>();
             userData.setMyUserName(cursor.getString(0));

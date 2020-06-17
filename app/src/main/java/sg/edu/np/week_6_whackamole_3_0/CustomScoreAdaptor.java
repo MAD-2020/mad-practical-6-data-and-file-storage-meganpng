@@ -35,9 +35,6 @@ public class CustomScoreAdaptor extends RecyclerView.Adapter<CustomScoreViewHold
 
 
     public CustomScoreViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        /* Hint:
-        This method dictates how the viewholder layuout is to be once the viewholder is created.
-         */
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.level_select, parent, false);
         return new CustomScoreViewHolder(v);
     }
@@ -59,20 +56,10 @@ public class CustomScoreAdaptor extends RecyclerView.Adapter<CustomScoreViewHold
 
             }
         });
-        /* Hint:
-        This method passes the data to the viewholder upon bounded to the viewholder.
-        It may also be used to do an onclick listener here to activate upon user level selections.
-
-
-
-         */
 
     }
 
     public int getItemCount(){
-        /* Hint:
-        This method returns the the size of the overall data.
-         */
         Log.v(TAG, FILENAME +": Getting number of items from ISBN List");
         return levelList.size();
     }

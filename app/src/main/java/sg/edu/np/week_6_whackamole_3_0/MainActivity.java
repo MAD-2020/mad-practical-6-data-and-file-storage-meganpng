@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = enterusername.getText().toString();
                 String password = enterpassword.getText().toString();
-                if(checkUser(username, password) == false){
+                if(!checkUser(username, password)){
                     Log.v(TAG, FILENAME + ": Invalid user!");
                     reset();
                     return;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean checkUser(String userName, String password){
         UserData data = dbHandler.findUser(userName);
-        Log.v(TAG, FILENAME + ": Running Checks..." + data.getMyUserName() + ": " + data.getMyPassword() +" <--> "+ userName + " " + password);
+        Log.v(TAG, FILENAME + ": Running Checks on Username: " + userName + " and Password: " + password);
         if(data == null){
             Log.v(TAG, FILENAME + ": Invalid username used!");
             Toast.makeText(getApplicationContext(), "Invalid username! Please re-enter again.",
