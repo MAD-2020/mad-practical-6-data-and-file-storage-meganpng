@@ -14,10 +14,7 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomScoreAdaptor extends RecyclerView.Adapter<CustomScoreViewHolder> {
-    /* Hint:
-        1. This is the custom adaptor for the recyclerView list @ levels selection page
 
-     */
     private static final String FILENAME = "CustomScoreAdaptor.java";
     private static final String TAG = "Whack-A-Mole3.0!";
     private UserData userData;

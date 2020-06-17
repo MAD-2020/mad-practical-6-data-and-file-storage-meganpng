@@ -72,7 +72,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
             ArrayList<Integer> scoreList = new ArrayList<>();
             userData.setMyUserName(cursor.getString(0));
             userData.setMyPassword(cursor.getString(1));
-            int levelsize = userData.getLevels().size();
             do{
                 levelList.add(cursor.getInt(2));
                 scoreList.add(cursor.getInt(3));
